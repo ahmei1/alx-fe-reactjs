@@ -1,4 +1,4 @@
-function maincontent() {
+function MainContent() {
     return (
         <main>
             <p>I love to visit New York, Paris, and Tokyo.</p>
@@ -6,4 +6,4 @@ function maincontent() {
     );
 }
 
-export default maincontent;
+export default MainContent;
