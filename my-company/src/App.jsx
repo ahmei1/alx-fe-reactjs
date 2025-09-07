@@ -9,7 +9,7 @@ import Contact from './components/Contact';
 
 const App = () => {
   return (
-    <div>
+    <div style={{ fontFamily: 'Arial, sans-serif' }}>
       <BrowserRouter>
         <Navbar />
         <Routes>
