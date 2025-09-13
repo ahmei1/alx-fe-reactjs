@@ -1,5 +1,7 @@
+// src/components/DeleteRecipeButton.jsx
+
 import React from 'react';
-import useRecipeStore from '../recipeStore';
+import useRecipeStore from './recipeStore'; // Make sure this path is correct
 import { useNavigate } from 'react-router-dom';
 
 const DeleteRecipeButton = ({ recipeId }) => {
@@ -18,7 +20,7 @@ const DeleteRecipeButton = ({ recipeId }) => {
       onClick={handleDelete}
       style={{ marginLeft: '10px', backgroundColor: 'red', color: 'white', border: 'none' }}
     >
-      Delete Recipe
+      Delete
     </button>
   );
 };

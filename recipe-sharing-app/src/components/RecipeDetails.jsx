@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import useRecipeStore from '../recipeStore';
+import useRecipeStore from './recipeStore';
 import EditRecipeForm from './EditRecipeForm';
 import DeleteRecipeButton from './DeleteRecipeButton';
 
@@ -36,7 +36,6 @@ const RecipeDetails = () => {
           </ul>
           <button onClick={() => setIsEditing(true)}>Edit</button>
           
-          {/* Use the new DeleteRecipeButton component */}
           <DeleteRecipeButton recipeId={recipe.id} />
           
           <button
