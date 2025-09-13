@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import useRecipeStore from '../recipeStore';
 import EditRecipeForm from './EditRecipeForm';
+import DeleteRecipeButton from './DeleteRecipeButton';
 
 const RecipeDetails = () => {
   const { recipeId } = useParams();
-  const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const recipe = useRecipeStore(state =>
     state.recipes.find(r => r.id === parseInt(recipeId))
   );
-  const deleteRecipe = useRecipeStore(state => state.deleteRecipe);
   const favorites = useRecipeStore(state => state.favorites);
   const addFavorite = useRecipeStore(state => state.addFavorite);
   const removeFavorite = useRecipeStore(state => state.removeFavorite);
@@ -18,13 +17,6 @@ const RecipeDetails = () => {
   if (!recipe) {
     return <div>Recipe not found!</div>;
   }
-
-  const handleDelete = () => {
-    if (window.confirm('Are you sure you want to delete this recipe?')) {
-      deleteRecipe(recipe.id);
-      navigate('/');
-    }
-  };
 
   const isFavorite = favorites.includes(recipe.id);
 
@@ -43,7 +35,10 @@ const RecipeDetails = () => {
             ))}
           </ul>
           <button onClick={() => setIsEditing(true)}>Edit</button>
-          <button onClick={handleDelete} style={{ marginLeft: '10px' }}>Delete</button>
+          
+          {/* Use the new DeleteRecipeButton component */}
+          <DeleteRecipeButton recipeId={recipe.id} />
+          
           <button
             onClick={() => isFavorite ? removeFavorite(recipe.id) : addFavorite(recipe.id)}
             style={{ marginLeft: '10px' }}

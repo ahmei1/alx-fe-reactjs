@@ -1,24 +1,54 @@
 import React from 'react';
-import RecipeList from './components/RecipeList';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import AddRecipeForm from './components/AddRecipeForm';
-import useRecipeStore from './components/recipeStore';
+import RecipeList from './components/RecipeList';
+import RecipeDetails from './components/RecipeDetails';
+import useRecipeStore from './recipeStore';
+import SearchBar from './components/SearchBar';
+import FavoritesList from './components/FavoritesList';
+import RecommendationsList from './components/RecommendationsList';
 
 const App = () => {
-  // Initialize some dummy data for demonstration
   const setRecipes = useRecipeStore(state => state.setRecipes);
+
   React.useEffect(() => {
     setRecipes([
-      { id: 1, title: 'Spaghetti Carbonara', description: 'A classic Italian pasta dish.' },
-      { id: 2, title: 'Chicken Curry', description: 'A flavorful and spicy chicken dish.' }
+      { id: 1, title: 'Spaghetti Carbonara', description: 'A classic Italian pasta dish with eggs, hard cheese, cured pork, and black pepper.', ingredients: ['spaghetti', 'eggs', 'pancetta', 'parmesan cheese'] },
+      { id: 2, title: 'Chicken Curry', description: 'A flavorful and spicy Indian chicken dish.', ingredients: ['chicken', 'curry powder', 'onion', 'coconut milk'] },
+      { id: 3, title: 'Vegetable Soup', description: 'A hearty and healthy soup with a mix of vegetables.', ingredients: ['carrots', 'potatoes', 'celery', 'onion'] },
     ]);
   }, [setRecipes]);
 
   return (
-    <div>
-      <h1>Recipe Sharing App</h1>
-      <AddRecipeForm />
-      <RecipeList />
-    </div>
+    <Router>
+      <div style={{ fontFamily: 'sans-serif', padding: '20px' }}>
+        <h1 style={{ textAlign: 'center' }}>Recipe Sharing App</h1>
+        <nav style={{ marginBottom: '20px', display: 'flex', justifyContent: 'center', gap: '15px' }}>
+          <Link to="/">Home</Link>
+          <Link to="/favorites">Favorites</Link>
+          <Link to="/recommendations">Recommendations</Link>
+        </nav>
+        <hr />
+        <Routes>
+          <Route path="/" element={
+            <>
+              <SearchBar />
+              <div style={{ display: 'flex', gap: '20px' }}>
+                <div style={{ flex: 1 }}>
+                  <AddRecipeForm />
+                </div>
+                <div style={{ flex: 2 }}>
+                  <RecipeList />
+                </div>
+              </div>
+            </>
+          } />
+          <Route path="/recipe/:recipeId" element={<RecipeDetails />} />
+          <Route path="/favorites" element={<FavoritesList />} />
+          <Route path="/recommendations" element={<RecommendationsList />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 
