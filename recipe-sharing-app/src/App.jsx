@@ -1,7 +1,7 @@
 import React from 'react';
 import RecipeList from './components/RecipeList';
 import AddRecipeForm from './components/AddRecipeForm';
-import useRecipeStore from './recipeStore';
+import useRecipeStore from './components/recipeStore';
 
 const App = () => {
   // Initialize some dummy data for demonstration
