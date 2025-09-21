@@ -1,11 +1,12 @@
-import Header from "./components/header";
+import Search from "./components/Search";
 
-function APP() {
+function App() {
   return (
-    
-    <Header />
-
+    <div>
+      <h1>GitHub User Search App</h1>
+      <Search />
+    </div>
   );
 }
 
-export default APP;
+export default App;
