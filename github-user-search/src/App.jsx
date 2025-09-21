@@ -1,7 +1,10 @@
-function APP() {
-  return (  
+import Header from "./components/header";
 
-    <h1>hellp world</h1>
+function APP() {
+  return (
+    
+    <Header />
+
   );
 }
 
