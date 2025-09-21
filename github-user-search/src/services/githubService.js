@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Advanced search using GitHub Search API
-export const fetchAdvancedUsers = async (username, location, minRepos) => {
+export const fetchUserData = async (username, location, minRepos) => {
   let query = "";
 
   if (username) query += `${username} in:login `;
