@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "Spaghetti Carbonara",
+    "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
+    "image": "https://www.istockphoto.com/photo/sphagetti-and-meatball-gm2152450317-573454157?utm_campaign=srp_photos_top&utm_content=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fsphagitti&utm_medium=affiliate&utm_source=unsplash&utm_term=sphagitti%3A%3A%3A",
+    "ingredients": [
+      "200g Spaghetti",
+      "2 large Eggs",
+      "50g Pecorino Romano cheese",
+      "100g Guanciale (or Pancetta)",
+      "Black pepper"
+    ],
+    "instructions": "1. Cook the spaghetti until al dente.\n2. In a separate bowl, mix the eggs, grated cheese, and pepper.\n3. Fry the guanciale until crispy.\n4. Drain the pasta, reserving some pasta water.\n5. Toss the hot pasta with the guanciale, then quickly mix in the egg mixture and pasta water to create a creamy sauce. Serve immediately."
+  },
+  {
+    "id": 2,
+    "title": "Chicken Tikka Masala",
+    "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato based gravy.",
+    "image": "https://images.unsplash.com/photo-1563729789396-8803155799a9?w=400&h=300&fit=crop",
+    "ingredients": [
+      "500g Chicken breast",
+      "1 cup plain Yogurt",
+      "1 can crushed Tomatoes",
+      "1/2 cup Heavy cream",
+      "Spices (Garlic, Ginger, Garam Masala)"
+    ],
+    "instructions": "1. Marinate chicken in yogurt and spices for 30 minutes.\n2. Grill or bake the chicken (tikka).\n3. Sauté onions, garlic, and ginger, then add tomatoes and cook down.\n4. Stir in the heavy cream and the cooked chicken.\n5. Simmer for 15 minutes. Serve with rice or naan."
+  },
+  {
+    "id": 3,
+    "title": "Vegetarian Chili",
+    "summary": "A hearty, bean-filled chili perfect for a cold evening.",
+    "image": "https://images.unsplash.com/photo-1563632971556-9a2f7c0c1b7e?w=400&h=300&fit=crop",
+    "ingredients": [
+      "1 can Black Beans",
+      "1 can Kidney Beans",
+      "1 Red bell pepper",
+      "1 Onion",
+      "Chili powder and Cumin"
+    ],
+    "instructions": "1. Sauté diced onion and bell pepper.\n2. Add beans, tomatoes, and spices to the pot.\n3. Simmer for at least 20 minutes to allow flavors to meld.\n4. Serve hot with toppings like cheese or sour cream."
+  }
+]
