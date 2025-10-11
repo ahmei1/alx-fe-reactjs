@@ -1,58 +1,74 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import React from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
-const initialValues = {
-  username: "",
-  email: "",
-  password: "",
-};
-
+// Validation Schema using Yup
 const validationSchema = Yup.object({
-  username: Yup.string().required("Username is required"),
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
+  username: Yup.string()
+    .min(3, 'Must be 3 characters or more')
+    .required('Username is required'),
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('Email is required'),
+  password: Yup.string()
+    .min(6, 'Password must be 6 characters or more')
+    .required('Password is required'),
 });
 
-export default function FormikForm() {
-  const handleSubmit = (values, { resetForm }) => {
-    console.log("Formik submitted:", values);
-    alert("Form submitted successfully!");
-    resetForm();
+function FormikForm() {
+  const initialValues = {
+    username: '',
+    email: '',
+    password: '',
+  };
+
+  const handleSubmit = (values, { setSubmitting, resetForm, setStatus }) => {
+    // Simulate API submission
+    console.log('Formik Form Data Submitted:', values);
+
+    // Mock API call delay
+    setTimeout(() => {
+      // Success simulation
+      setStatus({ success: 'Registration successful! (Formik)' });
+      resetForm();
+      setSubmitting(false);
+    }, 400);
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-4 border rounded">
-      <h2 className="text-xl font-bold mb-4">Register with Formik</h2>
-
+    <div style={{ padding: '20px', border: '1px solid #ccc' }}>
+      <h3>Formik Registration Form</h3>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        <Form>
-          <div className="mb-4">
-            <label>Username:</label>
-            <Field name="username" type="text" className="w-full border p-2 rounded" />
-            <ErrorMessage name="username" component="p" className="text-red-500" />
-          </div>
-
-          <div className="mb-4">
-            <label>Email:</label>
-            <Field name="email" type="email" className="w-full border p-2 rounded" />
-            <ErrorMessage name="email" component="p" className="text-red-500" />
-          </div>
-
-          <div className="mb-4">
-            <label>Password:</label>
-            <Field name="password" type="password" className="w-full border p-2 rounded" />
-            <ErrorMessage name="password" component="p" className="text-red-500" />
-          </div>
-
-          <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded">
-            Register
-          </button>
-        </Form>
+        {({ isSubmitting, status }) => (
+          <Form>
+            <div>
+              <label htmlFor="username">Username:</label>
+              <Field type="text" id="username" name="username" />
+              <ErrorMessage name="username" component="div" style={{ color: 'red' }} />
+            </div>
+            <div>
+              <label htmlFor="email">Email:</label>
+              <Field type="email" id="email" name="email" />
+              <ErrorMessage name="email" component="div" style={{ color: 'red' }} />
+            </div>
+            <div>
+              <label htmlFor="password">Password:</label>
+              <Field type="password" id="password" name="password" />
+              <ErrorMessage name="password" component="div" style={{ color: 'red' }} />
+            </div>
+            <button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? 'Registering...' : 'Register'}
+            </button>
+            {status?.success && <p style={{ color: 'green' }}>{status.success}</p>}
+          </Form>
+        )}
       </Formik>
     </div>
   );
 }
+
+export default FormikForm;
