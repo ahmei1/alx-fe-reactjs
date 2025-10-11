@@ -1,12 +1,12 @@
 import { useParams } from 'react-router-dom';
 
 const Post = () => {
-  const { postId } = useParams(); // Retrieves the value from the URL parameter
+  // useParams() is used to capture the variable part of the URL
+  const { postId } = useParams(); 
   return (
     <div>
-      <h2>Blog Post Viewer</h2>
-      <p>Currently viewing post with ID: **{postId}**</p>
-      <p>This demonstrates dynamic routing.</p>
+      <h2>Blog Post Viewer (Dynamic Routing)</h2>
+      <p>Currently viewing post with ID: <strong>{postId}</strong></p>
     </div>
   );
 };

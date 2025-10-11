@@ -1,15 +1,16 @@
 import { Navigate, Outlet } from 'react-router-dom';
 
-// Simple mock authentication state
-const isAuthenticated = true; // Set to 'false' to test redirection
+// **Mock Authentication State**
+// Change this to 'false' to test the protection/redirection
+const isAuthenticated = true; 
 
 const ProtectedRoute = () => {
   if (!isAuthenticated) {
-    // Redirects unauthenticated users to the home page
+    // If not authenticated, redirect to the home page
     return <Navigate to="/" replace />;
   }
 
-  // Renders the child route components if authenticated
+  // If authenticated, render the nested route content (via Outlet)
   return <Outlet />;
 };
 
