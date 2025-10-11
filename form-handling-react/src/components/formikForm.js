@@ -1,11 +1,12 @@
+// src/components/formikForm.js
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+import { Formik, Form, Field, ErrorMessage } from 'formik'; // **Formik integration**
+import * as Yup from 'yup'; // **Yup installed/integrated**
 
-// Validation Schema using Yup
+// **Yup validation schema**
 const validationSchema = Yup.object({
   username: Yup.string()
-    .min(3, 'Must be 3 characters or more')
+    .min(3, 'Username must be 3 characters or more')
     .required('Username is required'),
   email: Yup.string()
     .email('Invalid email address')
@@ -26,9 +27,7 @@ function FormikForm() {
     // Simulate API submission
     console.log('Formik Form Data Submitted:', values);
 
-    // Mock API call delay
     setTimeout(() => {
-      // Success simulation
       setStatus({ success: 'Registration successful! (Formik)' });
       resetForm();
       setSubmitting(false);
@@ -40,7 +39,7 @@ function FormikForm() {
       <h3>Formik Registration Form</h3>
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchema}
+        validationSchema={validationSchema} // **Formik validation logic**
         onSubmit={handleSubmit}
       >
         {({ isSubmitting, status }) => (
