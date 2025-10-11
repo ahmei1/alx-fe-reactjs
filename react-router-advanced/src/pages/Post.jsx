@@ -1,6 +1,13 @@
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
-export default function Post() {
-  const { id } = useParams();
-  return <div className="p-4">This is post with ID: <strong>{id}</strong></div>;
-}
+const Post = () => {
+  const { postId } = useParams(); // Retrieves the value from the URL parameter
+  return (
+    <div>
+      <h2>Blog Post Viewer</h2>
+      <p>Currently viewing post with ID: **{postId}**</p>
+      <p>This demonstrates dynamic routing.</p>
+    </div>
+  );
+};
+export default Post;

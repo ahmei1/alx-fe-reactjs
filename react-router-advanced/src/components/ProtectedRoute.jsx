@@ -1,8 +1,16 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from 'react-router-dom';
 
-export default function ProtectedRoute({ isAuthenticated, children }) {
+// Simple mock authentication state
+const isAuthenticated = true; // Set to 'false' to test redirection
+
+const ProtectedRoute = () => {
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    // Redirects unauthenticated users to the home page
+    return <Navigate to="/" replace />;
   }
-  return children;
-}
+
+  // Renders the child route components if authenticated
+  return <Outlet />;
+};
+
+export default ProtectedRoute;

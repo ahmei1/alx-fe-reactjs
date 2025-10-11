@@ -1,3 +1,2 @@
-export default function ProfileSettings() {
-  return <p>This is your profile settings section.</p>;
-}
+const ProfileSettings = () => <p>Viewing User Settings.</p>;
+export default ProfileSettings;

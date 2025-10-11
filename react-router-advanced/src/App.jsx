@@ -1,42 +1,43 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Home from "./pages/Home";
-import Profile from "./components/Profile";
-import ProfileDetails from "./pages/ProfileDetails";
-import ProfileSettings from "./pages/ProfileSettings";
-import Post from "./pages/Post";
-import Login from "./pages/Login";
-import ProtectedRoute from "./components/ProtectedRoute";
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Home from './pages/Home';
+import Profile from './pages/Profile';
+import Post from './pages/Post';
+import ProfileDetails from './pages/ProfileDetails';
+import ProfileSettings from './pages/ProfileSettings';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
-  const isAuthenticated = true; // simulate auth
-
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
+      <nav style={{ padding: '10px 20px', background: '#333' }}>
+        <Link to="/" style={{ color: 'white', marginRight: '15px' }}>Home</Link>
+        {/* Profile is protected, but the link is visible */}
+        <Link to="/profile" style={{ color: 'white', marginRight: '15px' }}>Profile</Link> 
+        {/* Dynamic Route Example */}
+        <Link to="/posts/123" style={{ color: 'white' }}>Post 123</Link> 
+      </nav>
+      <div style={{ padding: '20px' }}>
+        <Routes>
+          {/* Basic Route */}
+          <Route path="/" element={<Home />} />
 
-        {/* Protected Routes */}
-        <Route
-          path="/profile/*"
-          element={
-            <ProtectedRoute isAuthenticated={isAuthenticated}>
-              <Profile />
-            </ProtectedRoute>
-          }
-        >
-          {/* Nested Routes */}
-          <Route path="details" element={<ProfileDetails />} />
-          <Route path="settings" element={<ProfileSettings />} />
-        </Route>
+          {/* Dynamic Route */}
+          <Route path="/posts/:postId" element={<Post />} />
 
-        {/* Dynamic Route */}
-        <Route path="/post/:id" element={<Post />} />
+          {/* Protected Routes Wrapper */}
+          <Route path="/profile" element={<ProtectedRoute />}>
+            {/* Nested Routes inside the Profile component */}
+            <Route element={<Profile />}>
+              <Route index element={<ProfileDetails />} /> {/* Default child route */}
+              <Route path="details" element={<ProfileDetails />} />
+              <Route path="settings" element={<ProfileSettings />} />
+            </Route>
+          </Route>
 
-        <Route path="/login" element={<Login />} />
-
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
+          {/* Catch-all for 404 - Optional */}
+          <Route path="*" element={<h2>404 Not Found</h2>} />
+        </Routes>
+      </div>
     </Router>
   );
 }

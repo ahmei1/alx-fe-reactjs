@@ -1,3 +1,2 @@
-export default function ProfileDetails() {
-  return <p>This is your profile details section.</p>;
-}
+const ProfileDetails = () => <p>Viewing User Details.</p>;
+export default ProfileDetails;
