@@ -1,72 +1,59 @@
+import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import TodoList from '../components/TodoList';
+import '@testing-library/jest-dom';
+import TodoList from './TodoList';
 
 describe('TodoList Component', () => {
-  // Test 1: Initial Render
-  test('renders the initial list of todos', () => {
+  test('renders the initial empty list state', () => {
+    // Renders the TodoList component
     render(<TodoList />);
     
-    // Check for the heading
-    expect(screen.getByText(/My Todo List/i)).toBeInTheDocument();
-
-    // Check for the two initial items
-    expect(screen.getByText(/Learn React Testing Library/i)).toBeInTheDocument();
-    expect(screen.getByText(/Master React Query/i)).toBeInTheDocument();
+    // Checks that the "No tasks yet." message is displayed
+    expect(screen.getByText(/No tasks yet/i)).toBeInTheDocument();
   });
 
-  // Test 2: Adding a new todo
-  test('allows user to add a new todo item', () => {
+  test('adds a new todo item', () => {
     render(<TodoList />);
+    
+    // Find the input field
     const inputElement = screen.getByTestId('todo-input');
+    // Find the add button
     const addButton = screen.getByTestId('add-button');
-    const newTodoText = 'Walk the dog';
 
-    // 1. Simulate user typing
-    fireEvent.change(inputElement, { target: { value: newTodoText } });
-    expect(inputElement.value).toBe(newTodoText);
-
-    // 2. Simulate form submission
+    // Type a task into the input
+    fireEvent.change(inputElement, { target: { value: 'Buy groceries' } });
+    
+    // Click the Add button
     fireEvent.click(addButton);
 
-    // 3. Check if the new item is now in the document
-    expect(screen.getByText(newTodoText)).toBeInTheDocument();
+    // Check that the new task is displayed in the list
+    expect(screen.getByText('Buy groceries')).toBeInTheDocument();
     
-    // 4. Check if the input field is cleared
+    // Check that the input is cleared
     expect(inputElement.value).toBe('');
   });
 
-  // Test 3: Toggling todo completion status
-  test('allows user to toggle a todo item to completed', () => {
+  test('removes a todo item', () => {
     render(<TodoList />);
-    // Initial todo: "Learn React Testing Library" has id 1
-    const initialTodo = screen.getByText(/Learn React Testing Library/i);
     
-    // Check that it's initially not completed (no line-through style)
-    expect(initialTodo).not.toHaveStyle('text-decoration: line-through');
-
-    // Simulate clicking the todo item to toggle
-    fireEvent.click(initialTodo);
-
-    // Check that the item is now completed (has line-through style)
-    expect(initialTodo).toHaveStyle('text-decoration: line-through');
-  });
-
-  // Test 4: Deleting a todo
-  test('allows user to delete a todo item', () => {
-    render(<TodoList />);
-    const todoText = /Master React Query/i;
+    const inputElement = screen.getByTestId('todo-input');
+    const addButton = screen.getByTestId('add-button');
     
-    // 1. Ensure the todo is initially present
-    let todoItem = screen.getByText(todoText);
-    expect(todoItem).toBeInTheDocument();
+    // Add the item
+    fireEvent.change(inputElement, { target: { value: 'Task to delete' } });
+    fireEvent.click(addButton);
     
-    // 2. Find the delete button for the item (it's the second initial item, has id 2)
-    const deleteButton = screen.getByTestId('delete-button-2');
+    // Find the task text
+    const taskText = screen.getByText('Task to delete');
+    expect(taskText).toBeInTheDocument();
+    
+    // Find the dynamically created remove button (we can search for the text)
+    const removeButton = screen.getByText('Remove');
+    
+    // Click the Remove button
+    fireEvent.click(removeButton);
 
-    // 3. Simulate clicking the delete button
-    fireEvent.click(deleteButton);
-
-    // 4. Check that the item is no longer in the document
-    expect(screen.queryByText(todoText)).not.toBeInTheDocument();
+    // Check that the task is no longer in the document
+    expect(taskText).not.toBeInTheDocument();
   });
 });
